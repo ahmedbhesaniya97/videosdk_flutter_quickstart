@@ -40,16 +40,7 @@ class _JoinScreenState extends State<JoinScreen> {
               style: _buttonStyle,
               onPressed: () async {
                 _meetingID = await createMeeting();
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => MeetingScreen(
-                      token: _token,
-                      meetingId: _meetingID,
-                      displayName: "John Doe",
-                    ),
-                  ),
-                );
+                navigateToMeetingScreen();
               },
               child: const Text("CREATE MEETING"),
             ),
@@ -82,21 +73,25 @@ class _JoinScreenState extends State<JoinScreen> {
             SizedBox(height: 20),
             TextButton(
               onPressed: () async {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => MeetingScreen(
-                      meetingId: _meetingID,
-                      token: _token,
-                      displayName: "John Doe",
-                    ),
-                  ),
-                );
+                navigateToMeetingScreen();
               },
               style: _buttonStyle,
               child: const Text("JOIN MEETING"),
             )
           ],
+        ),
+      ),
+    );
+  }
+
+  void navigateToMeetingScreen(){
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => MeetingScreen(
+          token: _token,
+          meetingId: _meetingID,
+          displayName: "John Doe",
         ),
       ),
     );

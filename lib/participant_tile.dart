@@ -16,8 +16,6 @@ class _ParticipantTileState extends State<ParticipantTile> {
   Stream? videoStream;
   Stream? audioStream;
 
-  bool shouldRenderVideo = true;
-
   @override
   void initState() {
     _initStreamListeners();
@@ -50,7 +48,7 @@ class _ParticipantTileState extends State<ParticipantTile> {
           padding: const EdgeInsets.all(4.0),
           child: Stack(
             children: [
-              videoStream != null && shouldRenderVideo
+              videoStream != null
                   ? RTCVideoView(
                       videoStream?.renderer as RTCVideoRenderer,
                       objectFit:
