@@ -1,0 +1,49 @@
+name: Publish to Firebase Distribution Flutter Android
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      # 1
+      - name: Checkout code
+        uses: actions/checkout@v2
+      # 2
+      # Setup the flutter environment.
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+
+      # Get flutter dependencies.
+      - run: flutter pub get
+
+      # Build ipa.
+      - run: flutter build ios --release --no-codesign
+      # 3
+#       - name: Upload IPA
+#         uses: actions/upload-artifact@v2
+#         with:
+#           name: app-release.apk
+#           path: build/app/outputs/flutter-apk/app-release.apk
+  
+#   deploy-firebase:
+#     # 1
+#     needs: [ build ]
+#     runs-on: ubuntu-latest
+#     steps:
+#       # 2
+#       - uses: actions/download-artifact@master
+#         with:
+#           name: app-release.apk
+#       #3
+#       - name: upload artifact to Firebase App Distribution
+#         uses: wzieba/Firebase-Distribution-Github-Action@v1
+#         with:
+#           appId: ${{secrets.FIREBASE_APP_ID}}
+#           token: ${{secrets.FIREBASE_TOKEN}}
+#           groups: QA
+#           file: app-release.apk
