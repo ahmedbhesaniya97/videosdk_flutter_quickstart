@@ -24,26 +24,25 @@ jobs:
       # Build ipa.
       - run: flutter build ios --release --no-codesign
       # 3
-#       - name: Upload IPA
-#         uses: actions/upload-artifact@v2
-#         with:
-#           name: app-release.apk
-#           path: build/app/outputs/flutter-apk/app-release.apk
+      - name: Upload IPA
+        uses: actions/upload-artifact@v2
+        with:
+          path: build/ios/iphoneos
   
-#   deploy-firebase:
-#     # 1
-#     needs: [ build ]
-#     runs-on: ubuntu-latest
-#     steps:
-#       # 2
-#       - uses: actions/download-artifact@master
-#         with:
-#           name: app-release.apk
-#       #3
-#       - name: upload artifact to Firebase App Distribution
-#         uses: wzieba/Firebase-Distribution-Github-Action@v1
-#         with:
-#           appId: ${{secrets.FIREBASE_APP_ID}}
-#           token: ${{secrets.FIREBASE_TOKEN}}
-#           groups: QA
-#           file: app-release.apk
+  deploy-firebase:
+    # 1
+    needs: [ build ]
+    runs-on: ubuntu-latest
+    steps:
+      # 2
+      - uses: actions/download-artifact@master
+        with:
+          name: ios-build
+      #3
+      - name: upload artifact to Firebase App Distribution
+        uses: wzieba/Firebase-Distribution-Github-Action@v1
+        with:
+          appId: ${{secrets.FIREBASE_APP_IOS_ID}}
+          token: ${{secrets.FIREBASE_TOKEN}}
+          groups: QA
+          file: Runner.ipa
