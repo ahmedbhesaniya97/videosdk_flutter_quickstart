@@ -14,7 +14,7 @@ class JoinScreen extends StatefulWidget {
 class _JoinScreenState extends State<JoinScreen> {
   //Repalce the token with the sample token you generated from the VideoSDK Dashboard
   String _token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlrZXkiOiI1ZDcwMDg3My0yNmIzLTRlNzgtYjI2ZS0xYzBiZjRlYmNlNDYiLCJwZXJtaXNzaW9ucyI6WyJhbGxvd19qb2luIl0sImlhdCI6MTY0NTAxNDAxNSwiZXhwIjoxNjQ1NjE4ODE1fQ.UP2lVMdXZqRwWf7AUToc8GcHkPCGfWR_jWW9JLIZKWE";
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlrZXkiOiI3Yzc0YTY2ZS1jYTA0LTRiMmYtOTViZC00NThlOGJmMjk1YWUiLCJwZXJtaXNzaW9ucyI6WyJhbGxvd19qb2luIl0sImlhdCI6MTY0NTQzNDE5NiwiZXhwIjoxNjQ2MDM4OTk2fQ.foEH3B12dXj89AE4Ic9ocgkK2gVqfLp_BJrZvvKRwK8";
 
   String _meetingID = "";
 
@@ -60,13 +60,17 @@ class _JoinScreenState extends State<JoinScreen> {
                 onChanged: (meetingID) => _meetingID = meetingID,
                 decoration: InputDecoration(
                   border: const OutlineInputBorder(),
-                  fillColor: Theme.of(context).primaryColor,
                   labelText: "Enter Meeting ID",
-                  hintText: "Meeting ID",
+                  labelStyle: TextStyle(
+                    color: Colors.white,
+                  ),
                   prefixIcon: const Icon(
                     Icons.keyboard,
                     color: Colors.white,
                   ),
+                ),
+                style: TextStyle(
+                  color: Colors.white,
                 ),
               ),
             ),
